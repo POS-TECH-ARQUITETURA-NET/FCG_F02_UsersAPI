@@ -1,0 +1,46 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usersapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usersapi
+  template:
+    metadata:
+      labels:
+        app: usersapi
+    spec:
+      containers:
+        - name: usersapi
+          image: ghcr.io/yourorg/fcg_f02_usersapi:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ConnectionStrings__UsersDb
+              valueFrom:
+                secretKeyRef:
+                  name: usersapi-secrets
+                  key: CONNECTION_STRING
+            - name: Jwt__Secret
+              valueFrom:
+                secretKeyRef:
+                  name: usersapi-secrets
+                  key: JWT_SECRET
+            - name: RabbitMQ__Host
+              valueFrom:
+                configMapKeyRef:
+                  name: usersapi-config
+                  key: RABBITMQ_HOST
+            - name: RabbitMQ__User
+              valueFrom:
+                configMapKeyRef:
+                  name: usersapi-config
+                  key: RABBITMQ_USER
+            - name: RabbitMQ__Pass
+              valueFrom:
+                configMapKeyRef:
+                  name: usersapi-config
+                  key: RABBITMQ_PASS
