@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: usersapi
-          image: ghcr.io/yourorg/fcg_f02_usersapi:latest
+          image: docker.io/augustogc/fcg_f02_usersapi:0.1.0
           ports:
             - containerPort: 8080
           env:
@@ -24,11 +24,21 @@ spec:
                 secretKeyRef:
                   name: usersapi-secrets
                   key: CONNECTION_STRING
-            - name: Jwt__Secret
+            - name: Jwt__Key
               valueFrom:
                 secretKeyRef:
                   name: usersapi-secrets
-                  key: JWT_SECRET
+                  key: JWT_KEY
+            - name: Jwt__Issuer
+              valueFrom:
+                configMapKeyRef:
+                  name: usersapi-config
+                  key: JWT_ISSUER
+            - name: Jwt__Audience
+              valueFrom:
+                configMapKeyRef:
+                  name: usersapi-config
+                  key: JWT_AUDIENCE
             - name: RabbitMQ__Host
               valueFrom:
                 configMapKeyRef:

@@ -7,3 +7,5 @@ data:
   RABBITMQ_HOST: rabbitmq
   RABBITMQ_USER: guest
   RABBITMQ_PASS: guest
+  JWT_ISSUER: FCG_API
+  JWT_AUDIENCE: FCG_Cliente

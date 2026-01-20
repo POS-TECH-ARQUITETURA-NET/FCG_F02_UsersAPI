@@ -1,0 +1,29 @@
+# Ignore build artifacts
+bin/
+obj/
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.swp
+*.zip
+*.log
+
+# IDE folders
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+**/Dockerfile*
+*.dockerignore
+
+# OS files
+Thumbs.db
+.DS_Store
